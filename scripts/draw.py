@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw one idea from a list file using a seed string, for ai-design-studio Stage 0 (auto mode).
+"""Draw one line from a list file using a seed string, for ai-design-studio: the key message in Stage 0 (auto mode) and three concepts in the concept step (auto mode).
 
 Usage:
   python3 scripts/draw.py process/ideas.txt                 # new random seed, then draw

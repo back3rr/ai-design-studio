@@ -14,7 +14,8 @@ Chép thư mục này vào `~/.claude/skills/ai-design-studio/` (Claude Code), h
 SKILL.md              quy trình (tiếng Anh)
 references/critic.md  prompt cho critic
 references/ai-tells.md danh sách dấu hiệu "AI làm"
-scripts/draw.py       bốc ngẫu nhiên 1 ý tưởng ở Stage 0 (chế độ auto)
+references/motion.md  bản đồ kỹ thuật chuyển động (Technique 5)
+scripts/draw.py       bốc ngẫu nhiên 1 dòng: key message ở Stage 0 (auto), concept ở bước concept (auto)
 ```
 
 ## Thay đổi ngày 2026-11-20
@@ -33,6 +34,57 @@ scripts/draw.py       bốc ngẫu nhiên 1 ý tưởng ở Stage 0 (chế độ
    - **Giữ từ bản gốc:** CSS trang trí là dấu hiệu AI rõ nhất; dùng ảnh tạo ra (kèm shader hoặc 3D) khi nó thêm chất liệu, không gian, cảm xúc hay trạng thái; mỗi asset phải có việc; dùng công cụ tạo nào có sẵn; xem từng khung hình trong trình duyệt; chỉ dùng chuyển động khi thật sự tốt hơn; 2 cách dùng video đã kiểm chứng (clip lặp tách nền, clip chuyển trạng thái A → B); dùng aggregator như fal.ai.
    - **Thêm:** model nay tạo được cả 3D và animation; cả trang chung một ngôn ngữ hình ảnh; chọn dạng chuyển động nhẹ nhất; chuyển động phải mang ý nghĩa; trang vẫn dùng được trong lúc asset nặng đang tải.
 9. **Bỏ luật hỏi trước khi tiêu tiền** (Le Bach yêu cầu). Các câu "hỏi trước lần gọi trả phí đầu tiên" ở Technique 4 và "luôn báo chi phí trước" ở Technique 5 cũng được bỏ cho khớp. Checkpoint 2 và 3 vẫn báo số tiền đã tiêu.
+
+10. **Mọi chuyển động và hình ảnh đến từ concept** (Le Bach, sau lần test Kobe ra trang phẳng: 13 ảnh tĩnh, không video, không 3D, chỉ 2 hiệu ứng đổi màu).
+   - **Luật chung mới:** mọi animation, transition, graphic phải đến từ thế giới của trang. Bắt đầu từ "động từ" của thế giới (rót, áp chảo, mở cổng, gió lùa cỏ) để làm transition; parallax trang trí là dạng yếu nhất. Mỗi chuyển động vẫn phải có việc, không chiếm quyền cuộn trang. Trang tĩnh không còn là lựa chọn an toàn mặc định. Không làm âm thanh (Le Bach bỏ).
+   - **Dò gu:** danh sách sinh từ ý ở Stage 0 và phải trải qua nhiều hình thức trải nghiệm (cuộn kể chuyện, không gian 3D, công cụ, điện ảnh, trò chơi, khám phá phi tuyến); tối đa 3 ý là "trang cuộn tĩnh giả đồ in". Lý do: ở test Kobe cả 10 ý đều là đồ in giấy.
+   - **Bản nháp Stage 1** phải có chuyển động chủ đạo và ít nhất một transition.
+   - **Technique 5:** đảo mặc định. Viết "motion score" trước khi build; bỏ motion phải ghi lý do ở Checkpoint 2. Thêm `references/motion.md` (bản đồ kỹ thuật: GSAP/ScrollTrigger, CSS scroll-driven, View Transitions, three.js/WebGPU, shader, particle, Rive/Lottie, video trong suốt, quy trình asset AI) và luật kỹ thuật (reduced-motion, transform/opacity, nút dừng cho vòng lặp > 5 giây, không scrolljacking).
+   - **Không bắt buộc dùng kỹ thuật cao khi build** (Le Bach): thực thi tuỳ công cụ và thời gian, nhưng chuyển động phải được nghĩ kỹ và trình bày cho người dùng: demo trong trang nếu được (CSS/SVG đơn giản cũng được), nếu không thì motion score + storyboard khung hình. Ở Checkpoint 1 mỗi hướng kèm ý tưởng chuyển động. Lý do: không phải lúc nào user cũng có công cụ tạo asset trong Claude (ChatGPT, Gemini thì có).
+   - **Critic** xem thêm dải khung hình của chuyển động và chấm "chuyển động có đến từ thế giới không". Lý do: critic chỉ xem ảnh tĩnh nên thưởng cho trang tĩnh (2 vòng đều 6/10 ở test Kobe).
+   - **Technique 6** cắt chuyển động chung chung, giữ chuyển động của thế giới. **ai-tells.md** thêm 3 dấu hiệu chuyển động.
+   - Căn cứ: research "Chuyển động theo concept trang" (lý thuyết congruence, environmental storytelling, nguyên tắc motion, rủi ro seductive details / parallax / tiếp cận, ví dụ site đoạt giải). Chưa có nghiên cứu nào so trực tiếp motion theo concept với motion chung chung trên web; đây là heuristic có lý thuyết đỡ.
+
+11. **Tách rõ ý tưởng (Stage 0) và gu/thế giới (dò gu)** (Le Bach). Ở lần test Kobe, 8 cách hiểu đề lẫn cả hình thức ("trang như giấy chứng nhận", "thanh trượt BMS", "mỗi section là một mốc thời gian"), nên người dùng phải chọn hình thức 2 lần. Giờ Stage 0 chỉ trả lời 3 câu: trang bán hoặc hứa gì, cho ai, khách cần tin điều gì để hành động; cấm mọi từ về bố cục, hình ảnh, ẩn dụ cho trang, cấu trúc, điều hướng, chuyển động, tương tác. Dò gu thì sinh các thế giới khác nhau cho cùng một thông điệp đã chọn, không đổi thông điệp.
+
+12. **3 rule từ báo cáo research "Chuyển động theo concept trang"** (Le Bach đồng ý thêm):
+   - **Câu tự kiểm** (Technique 6 và critic): "tắt chuyển động này đi thì khách mất gì?" Không mất gì thì cắt; mất thông tin thì giữ; chỉ mất cảm giác về thế giới thì giữ nếu nằm trong hạn mức. Lý do: rủi ro nằm ở chuyển động không có việc (seductive details: Rey 2012, Sundararajan & Adesope 2020), không nằm ở chủ đề.
+   - **Hạn mức khoảnh khắc nổi bật:** một ở hero, một ở mỗi lần chuyển chương lớn, một ở hành động chính; còn lại là chuyển động nhẹ, có chức năng. Lý do: IBM Carbon dành motion "expressive" cho khoảnh khắc quan trọng; Sklar "avoid overload".
+   - **Mạch truyện tối thiểu:** trang là một hành trình qua các section, không chỉ khoác chủ đề. Lý do: hiệu ứng "nhập vai" (narrative transportation, van Laer 2014) cần có câu chuyện.
+
+13. **Người dựng đọc `references/ai-tells.md` trước khi dựng ở Stage 1** (Le Bach đồng ý). Trước đây danh sách dấu hiệu "AI làm" chỉ dùng ở Technique 7 (Stage 3), nên bản nháp cứ theo pattern quen rồi cuối quy trình mới sửa.
+
+14. **Technique 4 chỉ ghi "dùng công cụ tạo asset mà model có"** (Le Bach). Bỏ phần viết sẵn prompt cho ChatGPT/Gemini khi không có công cụ, và bỏ rule kiểm giấy phép asset.
+
+15. **Đổi tên theo thuật ngữ chuyên ngành** (Le Bach): dùng đúng từ của agency để người dùng dễ hiểu.
+   - Stage 0 "Idea" → **Key message** (thông điệp chính: trang nói gì).
+   - "Taste pass" (dò gu) → **concept step**; "world" → **concept** (creative concept: trang nói điều đó thế nào — hình ảnh, cấu trúc, chuyển động, tương tác). Technique 2 đổi tên thành "Creative concept, steered by the user's taste". Mỗi lựa chọn kèm ảnh moodboard nếu tạo được ảnh.
+   - Giữ **design direction** cho 3 hướng dựng ở Stage 1 (mỗi hướng = 1 concept + 1 seed).
+   - Đổi cả trong `references/` (critic, ai-tells, motion).
+
+16. **Kỹ thuật ra concept táo bạo trong bước concept** (Le Bach: "Đưa kỹ thuật vào phần prompt concept"). Thêm vào Technique 2, bước 1 (đây là cách nghĩ, không phải nguồn để chép):
+   - **Cấm ý hiển nhiên trước:** viết 5–10 concept mà ai cũng nghĩ ra, rồi không dùng. Thực hành phổ biến, không có tên chuẩn.
+   - **Mượn từ lĩnh vực khác:** nghĩ xem thông điệp sẽ thế nào nếu nằm ở một thế giới xa chủ đề, chỉ giữ phần vẫn nói đúng thông điệp. Gốc: lateral thinking của de Bono (*Lateral Thinking*, 1970) và bisociation của Koestler (*The Act of Creation*, 1964). **Không dùng danh sách lĩnh vực có sẵn, không bắt buộc số lượng** (Le Bach: AI bám keyword trong reference rồi làm theo đó, không nghĩ thêm). Bản trước có `references/domains.txt` và bước bốc lĩnh vực; đã bỏ khỏi skill.
+   - **Đổi thang đo, góc nhìn:** chữ M (Magnify/Minify) của SCAMPER (Eberle, 1971, dựa trên checklist của Osborn).
+   - **Mỗi concept có vai của khách, động từ, luật thế giới:** mình ghép từ thiết kế game (player fantasy), không phải kỹ thuật kinh điển.
+   - **Ít nhất 3/10 ý "nghe như không ổn"** (trước là "a few"): nguyên tắc hoãn phán xét của Osborn (*Applied Imagination*, 1953); con số 3 là mình đặt.
+   - **Gắn nhãn mỗi dòng:** mức táo bạo (safe/bold/wild) × mức bám thông điệp (strong/weak).
+   - Nguồn gốc các kỹ thuật ghi theo hiểu biết của Claude, chưa tra lại.
+
+17. **Concept phải tả trải nghiệm, không tả bố cục** (từ lần test Kobe; session chạy test tự nhận brief của mình "là mô tả bố cục, chưa phải brief tham vọng"). Thêm vào Technique 2, bước 2–3:
+   - Người dùng chỉ trả lời số ("7 và 6") thì hỏi lại một lần là thích gì ở mỗi ý. Lý do: concept phải viết từ ghi chú của người dùng; ở test Kobe AI không hỏi nên tự lấp chỗ trống bằng ý an toàn.
+   - Concept nói khách cảm thấy gì, thấy gì chuyển động, cảnh thay đổi ra sao, cùng vai/động từ/luật.
+   - Có **ít nhất 1 yêu cầu khó** bắt bản dựng phải làm được, không chỉ có danh sách "tránh". Không tự cấm chuyển động ("tĩnh, chậm") trừ khi người dùng muốn. Lý do: brief của hướng B ở test Kobe ghi "Tĩnh, chậm", tự cấm chuyển động từ đầu.
+   - Thêm 1 cặp ví dụ: brief "đồng hồ một đêm" bản tả bố cục và bản viết lại thành concept (một cảnh quay từ ghế số 7).
+   - **Chế độ auto: script bốc 3 concept** từ 10 ý AI đã liệt kê (`process/concepts.txt`, dùng lại `scripts/draw.py`, ghi seed), AI không tự chọn (Le Bach). Lý do: giống Stage 0, AI chọn từ danh sách của chính nó thì hội tụ về ý an toàn. Mọi concept trong danh sách phải liên quan đến thông điệp và chủ đề.
+
+18. **Bỏ "Cấm ý hiển nhiên trước"** ở bước concept (Le Bach: "Concept -> Không cần bỏ 8 ý ai cũng nghĩ ra"). Các kỹ thuật còn lại của mục 16 giữ nguyên.
+
+19. **Thêm Stage 0.5 · Content và IA map** (Le Bach, sau lần test điện gió: "sau stage 0 chưa có define content và IA"; "có content thì bước làm concept mới define IA được"). Thứ tự mới: key message → content → concept (concept định IA) → seed → dựng.
+   - **Stage 0.5 · Content** (`process/content.md`, dùng chung cho mọi hướng): câu hỏi người đọc mang tới, xếp theo ưu tiên, đánh dấu bắt buộc / nên có; câu trả lời bằng sự thật, chưa có thì để placeholder lộ rõ, không bịa; người đọc cần **cảm thấy gì** khi xem xong; một hành động chính. Không có thứ tự section, bố cục hay hình thức. Chế độ thường: người dùng sửa và bổ sung. Chế độ auto: ghi giả định.
+   - **IA map** cho mỗi concept: bảng "nội dung → nằm ở đâu trên đường đi của concept". Câu hỏi bắt buộc phải có chỗ rõ ràng; concept quyết định thứ tự. Truyền IA map cho người dựng.
+   - **Sau mỗi vòng critic**, AI tự đối chiếu trang với IA map và dòng "cảm thấy gì" (critic không được xem). Câu hỏi bắt buộc mà trang không còn trả lời rõ thì tính là một lỗ hổng, xếp cùng các lỗ hổng lớn của critic. **Technique 6** không được cắt chỗ duy nhất trả lời một câu hỏi bắt buộc.
+   - Lý do: ở test điện gió, skill nhảy từ key message (một câu) sang concept. Mỗi agent dựng tự đặt cấu trúc trang, và critic chê hướng được chọn là "template tuyển dụng khoác áo concept". Nếu chốt IA trước concept thì mọi concept ra cùng một khung, nên IA để concept quyết; còn dòng "cảm thấy gì" là để chấm độ hợp với người đọc, thứ critic không chấm.
 
 Lý do thêm Stage 0: ở các test, ý tưởng là chỗ AI hội tụ mạnh nhất. Khi để AI tự chọn, 5/5 lần ra cùng một cách hiểu. Khi code bốc từ danh sách AI tự viết, ra 5 ý khác nhau trong 5 lần.
 
