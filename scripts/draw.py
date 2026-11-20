@@ -11,7 +11,7 @@ How the draw works:
   2. SHA-256 of the seed gives a large number; that number mod the number of ideas
      picks the line. The same seed and the same list always give the same idea.
 
-The list file has one interpretation per line; numbering like "1." or "-" is
+The list file has one interpretation per line; labels like "1.", "K1." or "C3." and "-" are
 stripped and blank lines are ignored.
 Prints JSON: the seed, how many ideas were in the pool, the 1-based line picked, and the idea.
 """
@@ -41,7 +41,7 @@ def main():
     if not path.is_file():
         sys.exit(f"file not found: {path}")
     lines = path.read_text(encoding="utf-8").splitlines()
-    ideas = [re.sub(r"^\s*(\d+[.)]|[-*])\s*", "", l).strip() for l in lines]
+    ideas = [re.sub(r"^\s*([KkCc]?\d+[.):]|[-*])\s*", "", l).strip() for l in lines]
     ideas = [i for i in ideas if i]
     if not ideas:
         sys.exit("the ideas file is empty")
