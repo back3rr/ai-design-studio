@@ -33,7 +33,7 @@ Run the **visual + interaction** pass and the **copy** pass separately, and repo
 
 - Inflated headlines: "Supercharge…", "Unlock the power of…", "Elevate your…", "Seamlessly…"
 - "It's not just X, it's Y" and other contrast-for-effect constructions
-- Throat-clearing openers and filler ("In today's fast-paced concept…")
+- Throat-clearing openers and filler ("In today's fast-paced world…")
 - Grand verbs that pretend depth: empower, revolutionize, transform, unleash, harness
 - Groups of three adjectives or three parallel clauses as a reflex
 - Every sentence the same length and rhythm
