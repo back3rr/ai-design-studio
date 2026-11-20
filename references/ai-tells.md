@@ -25,12 +25,15 @@ Run the **visual + interaction** pass and the **copy** pass separately, and repo
 - Every hover is scale-up + bigger shadow
 - Every section fades/slides in on scroll
 - Animations with no purpose (they don't show a state change or guide attention)
+- Motion that doesn't come from the page's concept — the same fade, slide or hover any site could have
+- A page that sits still when its concept moves (no transition, no reaction, only static images)
+- Scrolljacking: the page takes over the scroll and the visitor loses control or position
 
 ## Copy
 
 - Inflated headlines: "Supercharge…", "Unlock the power of…", "Elevate your…", "Seamlessly…"
 - "It's not just X, it's Y" and other contrast-for-effect constructions
-- Throat-clearing openers and filler ("In today's fast-paced world…")
+- Throat-clearing openers and filler ("In today's fast-paced concept…")
 - Grand verbs that pretend depth: empower, revolutionize, transform, unleash, harness
 - Groups of three adjectives or three parallel clauses as a reflex
 - Every sentence the same length and rhythm
