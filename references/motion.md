@@ -38,4 +38,4 @@ A plain decorative parallax layer is the weakest form; use it only as background
 - Don't take over the scroll (scrolljacking): users lose their place.
 - Test on a phone-sized viewport and a slow connection; give mobile a lighter version if the GPU can't keep up.
 
-Sources: research notes in the creative-vibe-design repo, "Chuyển động theo concept trang" (2026-11).
+Sources: research notes in the creative-vibe-design repo, "Motion that comes from the page's concept" (2026-11).
