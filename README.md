@@ -86,6 +86,14 @@ scripts/draw.py       bốc ngẫu nhiên 1 dòng: key message ở Stage 0 (auto
    - **Sau mỗi vòng critic**, AI tự đối chiếu trang với IA map và dòng "cảm thấy gì" (critic không được xem). Câu hỏi bắt buộc mà trang không còn trả lời rõ thì tính là một lỗ hổng, xếp cùng các lỗ hổng lớn của critic. **Technique 6** không được cắt chỗ duy nhất trả lời một câu hỏi bắt buộc.
    - Lý do: ở test điện gió, skill nhảy từ key message (một câu) sang concept. Mỗi agent dựng tự đặt cấu trúc trang, và critic chê hướng được chọn là "template tuyển dụng khoác áo concept". Nếu chốt IA trước concept thì mọi concept ra cùng một khung, nên IA để concept quyết; còn dòng "cảm thấy gì" là để chấm độ hợp với người đọc, thứ critic không chấm.
 
+20. **Đánh nhãn riêng cho hai danh sách** (sau lần test điện gió). Key message đánh K1–K8, concept đánh C1–C10. Nếu người dùng chỉ nói số ("ý tưởng 8") mà số đó có ở cả hai danh sách, phải hỏi lại trước khi tiêu gì cho nó (dựng trang, chạy critic, tạo asset). `scripts/draw.py` bỏ được nhãn K/C khi bốc. Lý do: người dùng muốn thử key message #8, AI hiểu thành concept #8 và dựng nguyên một hướng, tốn một lượt dựng, một lượt critic và khoảng 945 credit ảnh.
+
+21. **Giọng văn ở Stage 0.5, viết copy sau khi có UI** (Le Bach: copy sau ai-tells "vẫn cụt lủn, khó hiểu, thiếu mạch và văn phong phù hợp"; "viết copy nên làm sau khi có UI… nếu viết trước thì UI bị fix cứng").
+   - **Stage 0.5 thêm giọng văn:** ai nói với ai, 3 từ cho giọng, 2–3 câu mẫu, từ vựng nên dùng và nên tránh. Chỉ chốt giọng, không chốt độ dài.
+   - **Lúc dựng:** agent viết chữ tạm theo giọng đó, thành câu nối nhau, không dán từng mẩu sự thật; độ dài theo UI.
+   - **Thêm bước viết copy ở đầu Stage 3**, sau vòng critic (UI đã ổn định): viết lại toàn bộ chữ thành một mạch theo đường đi của concept, khớp chỗ trống thật; được chỉnh UI một chút nếu cần. Một agent mới chỉ đọc chữ chấm: đọc to có trôi, có câu cụt, đoạn sau nối đoạn trước, giọng có hợp. Chuẩn chấm: skill `anti-ai-slop-writing` hoặc `humanizer` nếu có. Thứ tự Stage 3: viết copy → cắt giảm → ai-tells → người dùng viết dòng chính.
+   - Lý do: ai-tells chỉ gỡ câu sáo, không tạo mạch; content.md là bảng sự thật nên agent dán thành câu rời; critic chỉ xem ảnh, không ai đọc chữ từ đầu tới cuối.
+
 Lý do thêm Stage 0: ở các test, ý tưởng là chỗ AI hội tụ mạnh nhất. Khi để AI tự chọn, 5/5 lần ra cùng một cách hiểu. Khi code bốc từ danh sách AI tự viết, ra 5 ý khác nhau trong 5 lần.
 
 ## Thay đổi ở bản 2026-11-07
